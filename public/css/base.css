@@ -1,0 +1,24 @@
+*,*:before,*:after{box-sizing:border-box}
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,pre,a,abbr,acronym,address,code,em,img,footer,header,small,strike,strong,sub,sup,ol,ul,li,canvas,menu,nav,section,video,abbr,time,progress{
+  margin:0;padding:0;border:0;font:inherit;font-size:100%;font-weight:inherit;vertical-align:baseline;outline:0;background:transparent no-repeat top left
+}
+html{min-height:100%}
+body{position:relative;min-height:100%;font-family:sans-serif;font-size:62.5%;line-height:1.4;color:#222;background-color:#fff;-webkit-text-size-adjust:none}
+img,video{max-width:100%}
+svg{display:inline-block;max-height:100%;max-width:100%}
+svg line,svg use,svg path{fill:currentColor}
+ol,ul{padding:0;list-style:none}
+a{text-decoration:none;color:inherit;}
+strong{font-weight:700}
+small{font-size:smaller}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+

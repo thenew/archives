@@ -1,0 +1,15 @@
+<%- include('_header', {title: ''}) %>
+  <div>
+    <%# To iterate in the right order %>
+    <% data.projectsByYears.forEach(function(item){ %>
+      <div class="year"><%= item.year %></div>
+      <% item.projects.forEach(function(project){ %>
+        <% if (project.disabled) { %>
+          <span class="list-link is-disabled"><%= project.title %></span>
+        <% } else { %>
+          <a class="list-link" href="/<%= project.url %>"><%= project.title %></a>
+        <% } %>
+      <% }); %>
+    <% }); %>
+  </div>
+<%- include('_footer') %>

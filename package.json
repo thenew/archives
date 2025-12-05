@@ -1,0 +1,24 @@
+{
+  "name": "archives",
+  "version": "1.0.0",
+  "type": "module",
+  "author": "thenew",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon src/server.mjs & sleep 1 && open http://localhost:4100",
+    "start": "NODE_ENV=production node dist/main.mjs",
+    "start:prod": "NODE_ENV=production node dist/main.mjs",
+    "build": "NODE_ENV=production rollup --config",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "ejs": "^3.1.10",
+    "rollup": "^4.28.1",
+    "serve-static": "^1.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

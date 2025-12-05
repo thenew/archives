@@ -1,0 +1,32 @@
+<%- include('_header', {title: data.title, image: data.image}) %>
+<% if (data.text) { %>
+  <div class="text">
+    <%- data.text %>
+  </div>
+<% } %>
+<% if (data.medias) { %>
+  <ul class="media-list <% if (data.medias.length < 3) { %>media-list--<%= data.medias.length %><% } %>">
+    <% data.medias.forEach(function(media){ %>
+      <li class="media-item">
+        <a class="media-link" href="<%= media.url %>">
+
+          <% if (media.type == 'video') { %>
+            <video muted autoplay loop>
+              <% if (media.urls) { %>
+                <% media.urls.forEach(function(url){ %>
+                  <source src="<%= url %>" />
+                <% }); %>
+              <% } else { %>
+                <source src="<%= media.url %>" />
+              <% } %>
+            </video>
+          <% } else { %>
+            <img src="<%= media.url %>" alt="<%= media.name %>" />
+          <% } %>
+
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<%- include('_footer') %>
