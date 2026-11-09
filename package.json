@@ -10,6 +10,7 @@
     "start": "NODE_ENV=production node dist/main.mjs",
     "start:prod": "NODE_ENV=production node dist/main.mjs",
     "build": "NODE_ENV=production rollup --config",
+    "build:static": "node scripts/generate-static.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
