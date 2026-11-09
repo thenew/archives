@@ -85,7 +85,7 @@ const getProjectMedias = projectPath => {
     .filter(file => authorisedExtensions.includes(path.extname(file)))
     .map(file => ({
       filename: file,
-      url: `projects/${path.basename(projectPath)}/${file}`,
+      url: `/projects/${path.basename(projectPath)}/${file}`,
       type: ['.webm', '.mp4'].includes(path.extname(file)) ? 'video' : 'image',
       name: path.basename(file, path.extname(file)),
     }))
@@ -203,7 +203,7 @@ async function main() {
         title: project.title,
         text: text || null,
         medias: medias,
-        image: medias.length > 0 ? `projects/${project.filename}/${medias[0].filename}` : null,
+        image: medias.length > 0 ? `/projects/${project.filename}/${medias[0].filename}` : null,
         pageClass: 'single'
       },
       domain: DOMAIN
@@ -268,6 +268,9 @@ async function main() {
           content = content.replace(/content="public\//g, `content="${prefix}`)
           content = content.replace(/href="public\//g, `href="${prefix}`)
           content = content.replace(/content="projects\//g, `content="${prefix}projects/`)
+          // Handle media URLs in project pages
+          content = content.replace(/src="projects\//g, `src="${prefix}projects/`)
+          content = content.replace(/src="\/projects\//g, `src="${prefix}projects/`)
         }
 
         content = content.replace(/href="http:\/\/thenew\.fr"/g, 'href="https://thenew.fr"')
