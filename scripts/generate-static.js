@@ -198,6 +198,12 @@ async function main() {
     const uniqueNames = new Set(medias.map(({ name }) => name))
     medias = [...uniqueNames].map(name => medias.find(item => item.name === name))
 
+    // For project pages, make media URLs relative to work with GitHub Pages subdirectory
+    medias = medias.map(media => ({
+      ...media,
+      url: `../projects/${path.basename(project.path)}/${media.filename}`
+    }))
+
     const singleData = {
       data: {
         title: project.title,
@@ -255,12 +261,18 @@ async function main() {
         const depth = relativePath.split(path.sep).length - 1
         const prefix = '../'.repeat(depth)
 
+        // For GitHub Pages subdirectory support, remove leading slash from absolute paths
+        // This makes all links relative to the current directory
         if (isRoot) {
           content = content.replace(/href="\.\/public\//g, 'href="')
           content = content.replace(/src="\.\/public\//g, 'src="')
           content = content.replace(/content="http:\/\/archives\.thenew\.fr\//g, 'content="')
           content = content.replace(/content="public\//g, 'content="')
           content = content.replace(/href="public\//g, 'href="')
+          // Remove leading slash from project links in root page
+          content = content.replace(/href="\/([^"/]+)\/?"/g, 'href="$1/"')
+          // Fix home link
+          content = content.replace(/href="\/"/g, 'href="."')
         } else {
           content = content.replace(/href="\.\/public\//g, `href="${prefix}`)
           content = content.replace(/src="\.\/public\//g, `src="${prefix}`)
@@ -271,6 +283,12 @@ async function main() {
           // Handle media URLs in project pages
           content = content.replace(/src="projects\//g, `src="${prefix}projects/`)
           content = content.replace(/src="\/projects\//g, `src="${prefix}projects/`)
+          // For project pages, make all absolute paths relative to root
+          content = content.replace(/href="\/([^"/]+)\/?"/g, `href="${prefix}$1/"`)
+          content = content.replace(/href="\/projects\//g, `href="${prefix}projects/`)
+          content = content.replace(/content="\//g, `content="${prefix}`)
+          // Fix home link
+          content = content.replace(/href="\/"/g, `href="${prefix}"`)
         }
 
         content = content.replace(/href="http:\/\/thenew\.fr"/g, 'href="https://thenew.fr"')
